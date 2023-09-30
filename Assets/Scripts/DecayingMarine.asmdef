@@ -1,0 +1,16 @@
+{
+    "name": "DecayingMarine",
+    "rootNamespace": "DecayingMarine",
+    "references": [
+        "GUID:5555833c5753b2e4793ed72b1fe7253f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
