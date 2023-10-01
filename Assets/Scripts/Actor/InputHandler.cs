@@ -33,12 +33,23 @@ namespace DecayingMarine
 
             CheckItemUse();
             CheckDash();
-
+            CheckPunch();
             CheckItemChange();
+            CheckDropItem();
 
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 _player.GetHit(new DamageImpact(5, 0f, transform));
+            }
+
+            ChecKExitFromGame();
+        }
+
+        private void ChecKExitFromGame()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
         }
 
@@ -52,11 +63,27 @@ namespace DecayingMarine
             }
         }
 
+        private void CheckPunch()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _player.Punch();
+            }
+        }
+
         private void CheckItemUse()
         {
             if (Input.GetMouseButton(0))
             {
                 _player.UseCurrentItem();
+            }
+        }
+
+        private void CheckDropItem()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                _player.DropCurrentItem();
             }
         }
 

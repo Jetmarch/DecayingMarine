@@ -433,3 +433,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/Sounds/Deadly Kombat Free version
+/Assets/TextMesh Pro
+/Assets/Travis Game Assets/Hit Impact Effects
+/Assets/Sounds/Background

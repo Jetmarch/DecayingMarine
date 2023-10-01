@@ -2,20 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace DecayingMarine
 {
     public class ExitRoomTrigger : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+       
+
+        [SerializeField] private CameraPosition _cameraPosOnLevelPart;
+        private static CameraMover _cameraMover;
+       
+        private void Start()
         {
-        
+            if (_cameraMover == null)
+            {
+                _cameraMover = Camera.main.GetComponentInChildren<CameraMover>();
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnTriggerEnter(Collider other)
         {
-        
+            if (other.GetComponent<Player>() == null) return;
+
+            _cameraMover.MoveCameraToNextRoom(_cameraPosOnLevelPart.transform.position);
         }
     }
 }

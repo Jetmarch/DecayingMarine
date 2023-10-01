@@ -21,6 +21,8 @@ namespace DecayingMarine
 
         private Rigidbody _rb;
 
+        public float MovementSpeed { get { return _movementSpeed; } }
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
@@ -78,7 +80,13 @@ namespace DecayingMarine
 
         public void LookAt(Vector3 targetPos)
         {
-            _bodyForRotation.LookAt(new Vector3(targetPos.x, 0f, targetPos.z));
+            _bodyForRotation.LookAt(targetPos);
+            _bodyForRotation.rotation = Quaternion.Euler(0f, _bodyForRotation.rotation.eulerAngles.y, 0f);
+        }
+
+        public void ChangeMovementSpeed(float newSpeed)
+        {
+            _movementSpeed = newSpeed;
         }
     }
 }

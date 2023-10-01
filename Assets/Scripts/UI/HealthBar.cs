@@ -14,7 +14,8 @@ namespace DecayingMarine
 
         private void Start()
         {
-            _playerHealth.OnHealthChanged.AddListener(OnHealthChanged);
+            _playerHealth.OnHit.AddListener(OnHealthChanged);
+            _playerHealth.OnHeal.AddListener(OnHealthChanged);
             OnHealthChanged();
         }
 

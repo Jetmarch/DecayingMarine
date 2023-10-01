@@ -9,10 +9,17 @@ namespace DecayingMarine
     {
         [SerializeField] private Item[] _itemArray;
         [SerializeField] private int _maxItemCount;
-        [SerializeField] private ItemParent _itemParent;
+        [SerializeField] private float _maxWeight = 100f;
+        [SerializeField] private float _currentItemsWeight;
+        private ItemParent _itemParent;
 
         public int MaxItemCount { private set { _maxItemCount = value; } get { return _maxItemCount; } }
+        public float MaxWeight { get { return _maxWeight; } }
+        public float CurrentItemWeight { get { return _currentItemsWeight; } }
+
         public UnityEvent OnItemsUpdate;
+        public UnityEvent OnTooHeavyInventory;
+        public UnityEvent OnOkInventoryWeight;
 
         private void Start()
         {
@@ -30,8 +37,26 @@ namespace DecayingMarine
                     return i;
                 }
             }
-
             return -1;
+        }
+
+        private void CalculateItemsWeight()
+        {
+            _currentItemsWeight = 0;
+            for (int i = 0; i < _itemArray.Length; i++)
+            {
+                if (_itemArray[i] == null) continue;
+                _currentItemsWeight += _itemArray[i].Weight;
+            }
+
+            if (_currentItemsWeight > _maxWeight)
+            {
+                OnTooHeavyInventory?.Invoke();
+            }
+            else
+            {
+                OnOkInventoryWeight?.Invoke();
+            }
         }
 
         public Item GetItem(int itemPos)
@@ -41,6 +66,8 @@ namespace DecayingMarine
 
         public bool AddItem(Item item)
         {
+            if (_currentItemsWeight + item.Weight > _maxWeight) return false;
+
             int emptySlot = FindFirstEmptySlot();
             if (emptySlot == -1) return false;
 
@@ -48,6 +75,7 @@ namespace DecayingMarine
             _itemArray[emptySlot].transform.SetParent(_itemParent.transform);
             _itemArray[emptySlot].transform.position = _itemParent.transform.position + (_itemParent.transform.forward * .5f);
             _itemArray[emptySlot].transform.rotation = _itemParent.transform.rotation;
+            CalculateItemsWeight();
             OnItemsUpdate?.Invoke();
             return true;
         }
@@ -55,6 +83,16 @@ namespace DecayingMarine
         public void RemoveItem(int index)
         {
             _itemArray[index] = null;
+            CalculateItemsWeight();
+            OnItemsUpdate?.Invoke();
+        }
+
+        public void DecreaseMaxWeight(float amount)
+        {
+            _maxWeight -= amount;
+            _maxWeight = (int)Mathf.Clamp(_maxWeight, 0f, 100f);
+            CalculateItemsWeight();
+
             OnItemsUpdate?.Invoke();
         }
 

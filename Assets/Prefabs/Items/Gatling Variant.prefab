@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 2187799126371563334, guid: 9b6c03685bec0a949aa984a41b8d03e5,
         type: 3}
       propertyPath: m_Name
-      value: Gatling Variant
+      value: Gatling
       objectReference: {fileID: 0}
     - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
         type: 3}
@@ -77,6 +77,16 @@ PrefabInstance:
       propertyPath: _force
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
+        type: 3}
+      propertyPath: _weight
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
+        type: 3}
+      propertyPath: _useSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a245ee5d75348c84a89ffb7992f1dc82, type: 3}
     - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
         type: 3}
       propertyPath: _maxDamage
@@ -99,6 +109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
         type: 3}
+      propertyPath: _isDisposable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187799126371563335, guid: 9b6c03685bec0a949aa984a41b8d03e5,
+        type: 3}
       propertyPath: _timeBetweenShots
       value: 1.2
       objectReference: {fileID: 0}
@@ -107,5 +122,10 @@ PrefabInstance:
       propertyPath: _countOfShotsInOneUse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2187799126618611358, guid: 9b6c03685bec0a949aa984a41b8d03e5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: af24c62c65f524d48921db54991d85c7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b6c03685bec0a949aa984a41b8d03e5, type: 3}

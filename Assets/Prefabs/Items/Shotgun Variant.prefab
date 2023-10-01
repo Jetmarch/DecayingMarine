@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5350460204029528682, guid: fe55a509bac28b1418131ac74e2ed862,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf924a07680293b41bd021d777520062, type: 2}
     - target: {fileID: 5350460204318270384, guid: fe55a509bac28b1418131ac74e2ed862,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 5350460204318270386, guid: fe55a509bac28b1418131ac74e2ed862,
         type: 3}
       propertyPath: m_Name
-      value: Shotgun Variant
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
         type: 3}
@@ -77,6 +82,16 @@ PrefabInstance:
       propertyPath: _force
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
+        type: 3}
+      propertyPath: _weight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
+        type: 3}
+      propertyPath: _useSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
     - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
         type: 3}
       propertyPath: _maxDamage
@@ -96,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _spreadValue
       value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
+        type: 3}
+      propertyPath: _isDisposable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5350460204318270387, guid: fe55a509bac28b1418131ac74e2ed862,
         type: 3}

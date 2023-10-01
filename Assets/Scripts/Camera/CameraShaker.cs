@@ -16,7 +16,7 @@ namespace DecayingMarine
 
         private void Start()
         {
-            _playerHealth.OnHealthChanged.AddListener(ShakeCamera);
+            _playerHealth.OnHit.AddListener(ShakeCamera);
             _mainCamera = Camera.main;
             DOTween.Init();
         }

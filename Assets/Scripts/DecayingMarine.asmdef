@@ -2,7 +2,9 @@
     "name": "DecayingMarine",
     "rootNamespace": "DecayingMarine",
     "references": [
-        "GUID:5555833c5753b2e4793ed72b1fe7253f"
+        "GUID:5555833c5753b2e4793ed72b1fe7253f",
+        "GUID:8c4dd21966739024fbd72155091d199e",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

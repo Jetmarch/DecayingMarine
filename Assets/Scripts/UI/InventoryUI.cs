@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DecayingMarine
 {
     public class InventoryUI : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI _inventoryWeightText;
+        [SerializeField] private Image _inventoryWeightImage;
         [SerializeField] private ItemUI[] _itemsUI;
-        [SerializeField] private Inventory _playerInventory;
-        [SerializeField] private ItemUser _itemUser;
+        private Inventory _playerInventory;
+        private ItemUser _itemUser;
 
         private void Start()
         {
@@ -21,6 +25,7 @@ namespace DecayingMarine
 
             //_itemsUI = FindObjectsOfType<ItemUI>();
             OnCurrentItemIndexChanged(0);
+            OnItemsUpdate();
         }
 
         private void OnCurrentItemIndexChanged(int newItemIndex)
@@ -39,6 +44,9 @@ namespace DecayingMarine
             {
                 _itemsUI[i].SetItem(_playerInventory.GetItem(i));
             }
+
+            _inventoryWeightText.text = $"{_playerInventory.CurrentItemWeight} / {_playerInventory.MaxWeight} ";
+            _inventoryWeightImage.fillAmount = _playerInventory.CurrentItemWeight / _playerInventory.MaxWeight;
         }
     }
 }

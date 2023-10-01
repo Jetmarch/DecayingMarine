@@ -15,9 +15,7 @@ namespace DecayingMarine
         [SerializeField] private int _countOfShotsInOneUse = 1;
         [SerializeField] private float _force;
         [SerializeField] private bool _isReadyToShoot;
-
-        [Header("Sounds")]
-        [SerializeField] private AudioClip _shootSound;
+        [SerializeField] private GameObject _hitImpactPrefab;
 
 
         private AudioSource _audio;
@@ -29,6 +27,7 @@ namespace DecayingMarine
             _bulletSpawnPoint = FindObjectOfType<BulletSpawnPoint>();
             _audio = GetComponent<AudioSource>();
             _isReadyToShoot = true;
+            _isDisposable = false;
         }
 
         private void Update()
@@ -60,11 +59,12 @@ namespace DecayingMarine
 
         private void DoImpactOnTarget()
         {
-            var actor = _hit.transform.gameObject.GetComponent<Actor>();
-            if(actor != null)
+            var enemy = _hit.transform.gameObject.GetComponent<Enemy>();
+            if(enemy != null)
             {
                 var impact = new DamageImpact(Random.Range(_minDamage, _maxDamage), _force, transform);
-                actor.GetHit(impact);
+                enemy.GetHit(impact);
+                Instantiate(_hitImpactPrefab, _hit.point + (_hit.normal * 0.25f), Quaternion.identity);
             }
             else
             {
@@ -81,7 +81,8 @@ namespace DecayingMarine
             {
                 Shoot();
             }
-            _audio.PlayOneShot(_shootSound);
+            _audio.pitch = Random.Range(0.9f, 1.1f);
+            _audio.PlayOneShot(_useSound);
             _isReadyToShoot = false;
             _currentTimeBetweenShots = 0f;
         }
