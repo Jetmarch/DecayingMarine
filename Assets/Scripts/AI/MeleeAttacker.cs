@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 namespace DecayingMarine
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class MeleeAttacker : MonoBehaviour
+    public class MeleeAttacker : AIAgent
     {
         [SerializeField] private float _speed = 3.5f;
         [SerializeField] private float _stunTimeAfterHit = 0.2f;
@@ -34,6 +35,8 @@ namespace DecayingMarine
 
         private NavMeshAgent _agent;
         private Enemy _self;
+        private Health _health;
+        private MeshRenderer _meshRenderer;
 
         private static Actor _player;
 
@@ -45,6 +48,8 @@ namespace DecayingMarine
             }
             _agent = GetComponent<NavMeshAgent>();
             _self = GetComponent<Enemy>();
+            _health = GetComponent<Health>();
+            _meshRenderer = GetComponent<MeshRenderer>();
 
             _agent.speed = _speed;
             _currentRageChargeCounter = 0;
@@ -54,7 +59,14 @@ namespace DecayingMarine
 
         private void Update()
         {
-            ChasePlayer();
+            if (_health.CurrentHealth > _health.MaxHealth * 0.5f)
+            {
+                ChasePlayer();
+            }
+            else if(!_inCharge)
+            {
+                StartCoroutine(ChargeIntoPlayer());
+            }
 
             if (_currentTimeBetweenHitsToRage > 0f)
             {
@@ -74,14 +86,17 @@ namespace DecayingMarine
         {
             _inCharge = true;
             _chargeDamageZone.SetActive(true);
-            _self.SetInvulnerable(true);
+            //_self.SetInvulnerable(true);
             _agent.isStopped = true;
+            transform.DOShakePosition(_chargePreparationTime, .3f, 25);
+            transform.LookAt(_player.transform);
             yield return new WaitForSeconds(_chargePreparationTime);
             _agent.isStopped = false;
             _agent.speed = _chargeSpeed;
+            _agent.SetDestination(_player.transform.position);
             yield return new WaitForSeconds(_chargeTime);
             _agent.speed = _speed;
-            _self.SetInvulnerable(false);
+            //_self.SetInvulnerable(false);
             _chargeDamageZone.SetActive(false);
             _inCharge = false;
         }
@@ -122,13 +137,25 @@ namespace DecayingMarine
             }
         }
 
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
         public void Stop()
         {
             _agent.isStopped = true;
+            _chargeDamageZone.SetActive(false);
         }
 
-        public void OnHit()
+        public override void OnHit()
         {
+            Color prevColor = _meshRenderer.material.color;
+            _meshRenderer.material.DOColor(Color.red, 0.1f).OnComplete(() => { _meshRenderer.material.DOColor(prevColor, 0.1f); });
+            transform.DOShakePosition(_chargePreparationTime, .4f);
+
+            if (_inCharge) return;
+
             if (_currentTimeBetweenHitsToRage > 0) return;
             StartCoroutine(Stun());
             _currentTimeBetweenHitsToRage = _timeBetweenHitsToRage;

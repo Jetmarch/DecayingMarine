@@ -103,6 +103,8 @@ namespace DecayingMarine
             while (!isBossRoomCreated && countOfIterations < _maxGenerateIterations)
             {
                 //Move on the top from last position to create boss room
+
+
                 _currentLevelPart.OpenDoor(DoorPosition.Top);
                 _currentLevelPartPosition.z += _zLevelPartOffset;
                 LevelPart levelPart = GetLevelPartInCurrentPosition();

@@ -156,11 +156,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc01b7cfa40730f419ce68f316263d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  _icon: {fileID: 21300000, guid: e60bbff88194d2747844d29f63088b0d, type: 3}
   _isAvailable: 0
   _weight: 0
   _pickupSound: {fileID: 8300000, guid: 5da10817ef5d7c343bdbfbfb1801da9e, type: 3}
+  _failedPickupSound: {fileID: 0}
   _useSound: {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+  _isDisposable: 1
   _speedMultiplier: 1.25
   _buffTime: 20
   _buffEndSound: {fileID: 8300000, guid: 57e1f2f1d21957d4b9c43052a5ae927f, type: 3}

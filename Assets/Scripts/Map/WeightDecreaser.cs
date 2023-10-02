@@ -25,7 +25,6 @@ namespace DecayingMarine
         private void OnTriggerEnter(Collider other)
         {
             if (!_isActive) return;
-
             StartCoroutine(DelayedDecrease());
             _isActive = false;
         }

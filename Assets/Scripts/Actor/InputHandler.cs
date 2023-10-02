@@ -37,12 +37,17 @@ namespace DecayingMarine
             CheckItemChange();
             CheckDropItem();
 
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _player.GetHit(new DamageImpact(5, 0f, transform));
-            }
-
             ChecKExitFromGame();
+
+            CheckRestart();
+        }
+
+        private void CheckRestart()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                FindObjectOfType<SceneChangeAndFade>().RestartScene();
+            }
         }
 
         private void ChecKExitFromGame()
@@ -81,7 +86,7 @@ namespace DecayingMarine
 
         private void CheckDropItem()
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.Q))
             {
                 _player.DropCurrentItem();
             }

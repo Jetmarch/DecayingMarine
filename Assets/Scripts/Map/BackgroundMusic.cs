@@ -11,6 +11,7 @@ namespace DecayingMarine
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             _audioSource.loop = true;
             _audioSource.Play();
         }

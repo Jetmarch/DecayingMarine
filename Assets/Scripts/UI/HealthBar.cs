@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace DecayingMarine
     {
         [SerializeField] private Health _playerHealth;
         [SerializeField] private Image _healthSlider;
-        [SerializeField] private Text _healthText;
+        [SerializeField] private TextMeshProUGUI _healthText;
 
 
         private void Start()
@@ -21,7 +22,7 @@ namespace DecayingMarine
 
         private void OnHealthChanged()
         {
-            _healthText.text = _playerHealth.CurrentHealth.ToString();
+            _healthText.text = ((int)_playerHealth.CurrentHealth).ToString();
             _healthSlider.fillAmount = _playerHealth.CurrentHealth / _playerHealth.MaxHealth;
         }
     }

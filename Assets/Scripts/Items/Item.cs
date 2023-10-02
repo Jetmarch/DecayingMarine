@@ -14,6 +14,7 @@ namespace DecayingMarine
         [SerializeField] protected AudioClip _failedPickupSound;
         [SerializeField] protected AudioClip _useSound;
         [SerializeField] protected bool _isDisposable;
+        [SerializeField] private GameObject _model;
         public Sprite Icon { private set { _icon = value;  } get { return _icon; } }
         public float Weight { get { return _weight; } }
         public bool IsDisposable { get { return _isDisposable; } }
@@ -43,7 +44,7 @@ namespace DecayingMarine
         public void SetActiveAndVisible(bool state)
         {
             //_isAvailable = state;
-            GetComponentInChildren<MeshRenderer>().enabled = state;
+            _model.SetActive(state);
         }
     }
 }
